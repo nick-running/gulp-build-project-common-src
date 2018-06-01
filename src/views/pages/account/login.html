@@ -1,0 +1,112 @@
+{{#extend "layout"}}
+{{#content "css-main"}}
+<style type="text/css">
+    .mui-input-group:first-child {
+        margin-top: 20px;
+    }
+    .mui-content-padded {
+        margin-top: 25px;
+    }
+    .captch{
+        position: absolute;
+        right: 5px;
+        top: 3px
+    }
+</style>
+{{/content}}
+
+{{#content "body"}}
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">登录 - 小辣椒美食</h1>
+</header>
+<div class="mui-content">
+    <form id='login-form' class="mui-input-group">
+        <div class="mui-input-row">
+            <label>手机号码</label>
+            <input id='phoneNumber' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号" maxlength="11">
+            <!--<input id='phoneNumber' type="text" class="mui-input-clear mui-input" value="13658154915" placeholder="请输入手机号">-->
+        </div>
+        <div class="mui-input-row">
+            <label>验证码</label>
+            <input id='captch' type="number" class="mui-input-clear mui-input" maxlength="6" placeholder="请输入验证码">
+            <!--<input id='captch' type="number" class="mui-input-clear mui-input" maxlength="6" value="234325" placeholder="请输入验证码">-->
+            <button type="button" id="captchBtn" class="captch mui-btn-success" disabled>获取验证码</button>
+        </div>
+    </form>
+    <div class="mui-content-padded">
+        <button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+    </div>
+</div>
+{{/content}}
+{{#content "js-main"}}
+<script src="{{app.assetsJs}}/account.js"></script>
+<script type="text/javascript">
+    (function($, doc) {
+        mui.init()
+        var loginButton = doc.getElementById('login');
+        var phoneNumber = doc.getElementById('phoneNumber');
+        var captchBtn = doc.getElementById('captchBtn');
+        var captch = doc.getElementById('captch');
+        phoneNumber.addEventListener('input', function () {
+            var phone_pattern = /^1[3|4|5|7|8][0-9]{9}$/;
+            if(phone_pattern.test(this.value)) { // 手机号输入正确
+                captchBtn.disabled = false
+            }else{ // 手机号格式输入错误
+                captchBtn.disabled = true
+            }
+        })
+        captchBtn.addEventListener('tap', function () {
+            app.captchCountDown(this)
+            mui.ajax('/client_user/getCaptch',{
+                data:{
+                    phoneNumber: phoneNumber.value
+                },
+                dataType:'json',
+                type:'post',
+                timeout:10000,
+                headers:{'Content-Type':'application/json'},
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(xhr,type,errorThrown){
+                    console.log(type);
+                }
+            });
+        })
+        loginButton.addEventListener('tap', function(event) {
+            var loginInfo = {
+                phoneNumber: phoneNumber.value,
+                captch: captch.value
+            };
+            app.login(loginInfo, function(err) {
+                if (err) {
+                    mui.toast(err);
+                    return;
+                }
+                mui.ajax('/client_user/login',{
+                    data: loginInfo,
+                    dataType:'json',//服务器返回json格式数据
+                    type:'post',//HTTP请求类型
+                    timeout:10000,//超时时间设置为10秒；
+                    headers:{'Content-Type':'application/json'},
+                    success:function(data){
+                        if(!data.errno) {
+                            localStorage.setItem('token', data.data.token);
+                            localStorage.getItem('token');
+                            mui.toast(data.data.token)
+                        }else{
+                            console.log(data);
+                            mui.toast(data.errmsg)
+                        }
+                    },
+                    error:function(xhr,type,errorThrown){
+                        console.log(type);
+                    }
+                });
+
+            });
+        });
+    }(mui, document));
+</script>
+{{/content}}
+{{/extend}}

@@ -1,0 +1,116 @@
+{{#extend "layout"}}
+
+{{#content "css-main"}}
+<style>
+    .mui-row.mui-fullscreen>[class*="mui-col-"] {
+        height: 100%;
+        padding-bottom: 60px;
+    }
+
+    .mui-col-xs-3,
+    .mui-col-xs-9 {
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    .mui-segmented-control .mui-control-item {
+        line-height: 50px;
+        width: 100%;
+    }
+
+    .mui-control-content {
+        display: block;
+    }
+
+    .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+        background-color: #fff;
+    }
+    .cart-box{
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        background: grey;
+        display: flex;
+        bottom: 0;
+    }
+    .cart-box>.brief{
+        width: 60%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        background: grey;
+        color: #fff;
+        font-size: 18px;
+    }
+    .cart-box>.mui-btn{
+        width: 40%;
+        border-radius: 0;
+        border: 0;
+        font-size: 18px;
+    }
+    .mui-control-content h3{
+        margin: 10px;
+        text-align: center;
+        color: #9e9e9e;
+        font-weight: 500;
+        font-family: 'Microsoft Yahei';
+    }
+    .mui-table-view-cell .opt-box{
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
+        line-height: 25px;
+    }
+    .mui-table-view-cell>.price{
+        color: #da000e;
+    }
+    .opt-box .opt-btn{
+        padding: 0;
+        line-height: 25px;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        margin: 5px;
+    }
+    .opt-box>span{
+        display: inline-block;
+        margin: 5px 4px;
+    }
+    .opt-box>.minus,
+    .opt-box>.num-show{
+        opacity: 0;
+        transition: all ease-in .2s;
+    }
+    .opt-box>.opt-btn.minus.active,
+    .opt-box>.num-show.active{
+        opacity: 1;
+    }
+    #howMany{
+        transition: all ease-in .2s;
+    }
+    #howMany.active{
+        transform: scale(2);
+    }
+</style>
+{{/content}}
+{{#content "body"}}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">点餐</h1>
+</header>
+<div class="mui-content mui-row mui-fullscreen">
+    <div class="mui-col-xs-3">
+        <div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+        </div>
+    </div>
+    <div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;"></div>
+</div>
+<div id="cartBox" class="cart-box">
+    <div class="brief"><span id="howMany">0</span>个菜，共<span id="totalPrice">0</span>元</div>
+    <button id="submitBtn" class="mui-btn mui-btn-primary" disabled></button>
+</div>
+{{/content}}
+{{#content "js-main"}}
+<script src="{{app.assetsJs}}/order-food.js"></script>
+{{/content}}
+{{/extend}}

@@ -1,0 +1,74 @@
+{{#extend "layout"}}
+
+{{#content "css-main"}}
+<style type="text/css">
+
+    .title{
+        margin: 20px 15px 7px;
+        color: #6d6d72;
+        font-size: 15px;
+    }
+    .title>.date{
+        float: right
+    }
+    .opt-box{
+        margin: 0 10px;
+    }
+    .opt-box>.mui-btn{
+        display: block;
+        font-size: 20px;
+    }
+    .info-box{
+        text-align: right;
+        margin: 0 10px 10px;
+        font-size: 20px;
+        color:#6b6b6b;
+    }
+    .info-box>span{
+        font-size: 30px;
+    }
+</style>
+{{/content}}
+{{#content "body"}}
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">订单详情</h1>
+</header>
+<div class="mui-content">
+
+    <div class="title">
+        3号桌，5道菜
+        <span class="mui-badge mui-badge-primary">进行中</span>
+        <span class="date">17:30:23</span>
+    </div>
+    <div class="mui-card" style="margin-bottom: 20px;">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a>
+                    鱼香茄子<span class="mui-badge">13 元</span>
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a>
+                    番茄炒蛋<span class="mui-badge">13 元</span>
+                </a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a>
+                    水煮肉片<span class="mui-badge">20 元</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="info-box">共<span>46</span>元</div>
+    <div class="opt-box">
+        <div class="mui-btn mui-btn-primary">结账</div>
+    </div>
+</div>
+{{/content}}
+{{#content "js-main"}}
+<script type="text/javascript">
+    mui.init()
+</script>
+{{/content}}
+{{/extend}}

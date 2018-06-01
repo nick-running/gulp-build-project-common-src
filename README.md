@@ -1,0 +1,1 @@
+This is a project about to build sub project common src

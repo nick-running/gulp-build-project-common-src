@@ -1,0 +1,53 @@
+{{#extend "layout"}}
+
+{{#content "css-main"}}
+<style type="text/css">
+    .hint-box{
+        margin-top: 150px;
+        text-align: center;
+    }
+    .hint-icon>.mui-icon{
+        font-size: 80px;
+        background: #007aff;
+        border-radius: 50%;
+        color: #fff
+    }
+    .hint-icon>.checkmarkempty{
+        background: limegreen;
+    }
+    .hint-icon>.closeempty{
+        background: #dd524d;
+    }
+    .hint-box>.mui-btn{
+        margin-top: 20px;
+
+        padding: 12px 24px;
+        font-size: 20px;
+    }
+    .hint-box>p{
+        margin-top: 20px;
+        font-size: 20px;
+    }
+</style>
+{{/content}}
+{{#content "body"}}
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">订单状态</h1>
+</header>
+<div class="mui-content">
+    <div class="hint-box">
+        <div class="hint-icon">
+            <!--<span class="mui-icon mui-icon-closeempty closeempty"></span>-->
+            <span class="mui-icon mui-icon-checkmarkempty checkmarkempty"></span>
+        </div>
+        <p>点餐成功，你可以</p>
+        <button class="mui-btn mui-btn-primary">查看订单</button>
+    </div>
+</div>
+{{/content}}
+{{#content "js-main"}}
+<script type="text/javascript">
+    mui.init()
+</script>
+{{/content}}
+{{/extend}}

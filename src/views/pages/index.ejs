@@ -1,0 +1,15 @@
+{{#extend "layout"}}
+{{#content "css-plugin"}}
+<link rel="stylesheet" href="{{app.assetsAliFonts}}/iconfont.css">
+{{/content}}
+{{#content "css-main"}}
+{{/content}}
+
+{{#content "body"}}
+<div id="app"></div>
+{{/content}}
+{{#content "js-main"}}
+<script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[0] %>"></script>
+<script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[1] %>"></script>
+{{/content}}
+{{/extend}}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+    {{#block "head"}}
+        <meta charset="utf-8">
+        <meta name="renderer" content="webkit">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        {{#if (content "rawTitle")}}
+            <title>{{block "rawTitle"}}</title>
+        {{else}}
+            <title>{{projectName}}{{block "title"}}{{app.titleSuffix}}</title>
+        {{/if}}
+        <link rel="stylesheet" href="{{app.assetsCss}}/mui.min.css"/>
+        {{#block "css-plugin"}}{{/block}}
+        {{#block "css-main"}}{{/block}}
+    {{/block}}
+</head>
+<body>
+    {{#block "body"}}
+        <h2>Hello World</h2>
+    {{/block}}
+
+    <script src="{{app.assetsJs}}/mui.min.js"></script>
+{{#block "content-tpl"}}{{/block}}
+{{#block "js-plugin"}}{{/block}}
+{{#block "js-main"}}{{/block}}
+</body>
+</html>

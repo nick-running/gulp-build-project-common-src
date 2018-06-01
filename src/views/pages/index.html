@@ -1,0 +1,103 @@
+{{#extend "layout"}}
+{{#content "css-plugin"}}
+<link rel="stylesheet" href="{{app.assetsAliFonts}}/iconfont.css">
+{{/content}}
+{{#content "css-main"}}
+<style>
+
+    .title{
+        margin: 20px 15px 10px;
+        color: #6d6d72;
+        font-size: 15px;
+    }
+
+    .oa-contact-cell.mui-table .mui-table-cell {
+        padding: 11px 0;
+        vertical-align: middle;
+    }
+
+    .oa-contact-cell {
+        position: relative;
+        margin: -11px 0;
+    }
+
+    .oa-contact-avatar {
+        width: 75px;
+    }
+    .oa-contact-avatar img {
+        border-radius: 50%;
+    }
+    .oa-contact-content {
+        width: 100%;
+    }
+    .oa-contact-name {
+        margin-right: 20px;
+    }
+    .oa-contact-name, oa-contact-position {
+        float: left;
+    }
+    .hint-box{
+        margin-top: 200px;
+        text-align: center;
+        font-size: 24px;
+        transition: all ease-out 1.3s;
+    }
+    .hint-box.active{
+        transform: scale(2);
+    }
+    .mui-table-view .date{
+        float: right;
+        margin-right:30px
+    }
+</style>
+{{/content}}
+
+{{#content "body"}}
+<nav class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item" href="#order-food">
+        <span class="mui-icon iconfont icon-diancan"></span>
+        <span class="mui-tab-label">点餐</span>
+    </a>
+    <a class="mui-tab-item mui-active" href="#order-list">
+        <span class="mui-icon iconfont icon-dingdan"></span>
+        <span class="mui-tab-label">订单</span>
+    </a>
+</nav>
+<div class="mui-content">
+    <div id="order-food" class="mui-control-content">
+        <div class="hint-box">
+            <a href="order-food.html">开始点餐...</a>
+        </div>
+    </div>
+    <div id="order-list" class="mui-control-content mui-active">
+        <div class="title">点击查看订单</div>
+
+        <ul class="mui-table-view mui-table-view-chevron">
+            <li class="mui-table-view-cell"><a href="" class="mui-navigate-right">3号桌，5道菜 <span class="date">17:30:23</span><span class="mui-badge mui-badge-primary">进行中</span></a></li>
+            <li class="mui-table-view-cell"><a href="" class="mui-navigate-right">2号桌<span class="date">2017-11-13 17:02:25</span><span class="mui-badge mui-badge-success">已完成</span></a></li>
+            <li class="mui-table-view-cell"><a href="" class="mui-navigate-right">1号桌<span class="date">2017-02-18 17:02:25</span><span class="mui-badge">已取消</span></a></li>
+        </ul>
+
+    </div>
+</div>
+{{/content}}
+{{#content "js-main"}}
+<script>
+    mui.init({
+        swipeBack:true //启用右滑关闭功能
+    });
+    mui('.mui-bar-tab').on('tap', '.mui-tab-item', function(e) {
+        var href = this.getAttribute('href');
+        if(href == '#order-food'){
+            setTimeout(function(){
+                var hintBox = document.querySelector('.hint-box')
+                hintBox.className = hintBox.className+' active'
+            },300)
+            setTimeout(function(){
+                window.location.href = 'food/order-food.html'
+            },800)
+        }
+    });
+</script>
+{{/content}}
+{{/extend}}
